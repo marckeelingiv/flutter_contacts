@@ -11,8 +11,17 @@ enum ShowPickerImpl {
         pendingResult = result
 
         DispatchQueue.main.async {
-            guard let rootVC = ViewControllerUtils.rootViewController() else {
-                result(HandlerHelpers.makeError("No view controller available"))
+            guard let rootVC = ViewControllerUtils.presentingViewController() else {
+                result(
+                    HandlerHelpers.makeError(
+                        code: "no_view_controller",
+                        message: "No active view controller available",
+                        details: [
+                            "method": "native.showPicker",
+                            "sceneSummary": ViewControllerUtils.sceneDebugSummary(),
+                        ]
+                    )
+                )
                 pendingResult = nil
                 return
             }
