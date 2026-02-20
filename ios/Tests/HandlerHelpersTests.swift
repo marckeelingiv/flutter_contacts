@@ -3,6 +3,26 @@ import Flutter
 import XCTest
 
 final class HandlerHelpersTests: XCTestCase {
+    func testMakeErrorWithExplicitCodeMessageAndDetails() {
+        let details: [String: Any] = ["method": "native.showPicker", "attempt": 1]
+        let error = HandlerHelpers.makeError(
+            code: "no_view_controller",
+            message: "No active view controller available",
+            details: details
+        )
+
+        XCTAssertEqual(error.code, "no_view_controller")
+        XCTAssertEqual(error.message, "No active view controller available")
+        XCTAssertNotNil(error.details as? [String: Any])
+    }
+
+    func testMakeErrorUsesDefaultPluginCode() {
+        let error = HandlerHelpers.makeError("Any error")
+        XCTAssertEqual(error.code, "flutter_contacts_error")
+        XCTAssertEqual(error.message, "Any error")
+        XCTAssertNil(error.details)
+    }
+
     func testHandleResultReturnsValue() {
         let expectation = XCTestExpectation(description: "result returned")
         HandlerHelpers.handleResult({ value in

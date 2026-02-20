@@ -4,8 +4,12 @@ import Foundation
 enum HandlerHelpers {
     static let errorCode = "flutter_contacts_error"
 
+    static func makeError(code: String, message: String, details: Any? = nil) -> FlutterError {
+        FlutterError(code: code, message: message, details: details)
+    }
+
     static func makeError(_ message: String) -> FlutterError {
-        FlutterError(code: errorCode, message: message, details: nil)
+        makeError(code: errorCode, message: message)
     }
 
     static func nsError(_ message: String, code: Int = 1) -> NSError {
