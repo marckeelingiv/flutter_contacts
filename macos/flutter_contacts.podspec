@@ -8,7 +8,7 @@ Fast, complete contact management for Android, iOS & macOS — all fields, group
   s.homepage         = 'http://example.com'
   s.license          = { :type => 'MIT', :file => '../LICENSE' }
   s.author           = { 'Your Company' => 'email@example.com' }
-  s.source           = { :git => 'https://github.com/QuisApp/flutter_contacts.git', :tag => s.version.to_s }
+  s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'FlutterMacOS'
   s.platform = :osx, '10.15'
